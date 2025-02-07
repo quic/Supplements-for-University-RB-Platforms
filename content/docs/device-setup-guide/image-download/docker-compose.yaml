@@ -1,0 +1,27 @@
+# Copyright (c) 2025 Qualcomm Innovation Center, Inc. All rights reserved.
+# SPDX-License-Identifier: BSD-3-Clause-Clear
+
+---
+name: sdkmanager
+services:
+  setup_qemu:
+    image: multiarch/qemu-user-static:register
+    command: [ "--reset" ]
+    privileged: true
+  download_build:
+    build: .
+    depends_on:
+      setup_qemu:
+        condition: service_completed_successfully
+    volumes:
+      - ./build:/build
+    stdin_open: true
+    tty: true
+  chown_files:
+    image: public.ecr.aws/ubuntu/ubuntu:20.04
+    depends_on:
+      download_build:
+        condition: service_completed_successfully
+    command: ["/bin/sh", "-c", "chown -R `stat -c \"%u:%g\" /build` /build"]
+    volumes:
+      - ./build:/build

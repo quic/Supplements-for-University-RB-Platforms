@@ -1,0 +1,25 @@
+baseURL: https://quic.github.io/Supplements-for-University-RB-Platforms
+languageCode: en-us
+title: Supplements for University RB Platforms
+module:
+  imports:
+    - path: github.com/imfing/hextra
+menu:
+  main:
+    - name: Documentation
+      pageRef: /docs
+      weight: 1
+    - name: Search
+      weight: 2
+      params:
+        type: search
+    - name: GitHub
+      weight: 3
+      url: https://github.com/quic/Supplements-for-University-RB-Platforms
+      params:
+        icon: github
+params:
+  editURL:
+    enable: true
+    base: https://github.com/quic/Supplements-for-University-RB-Platforms/edit/main/content
+  displayUpdatedDate: true
